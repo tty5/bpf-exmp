@@ -1,0 +1,16 @@
+kprobe:__x64_sys_nanosleep
+/comm=="a.out"/
+{
+    @start[tid] = nsecs;
+}
+
+kretprobe:__x64_sys_nanosleep
+/@start[tid]/
+{
+    $d=(nsecs - @start[tid])/1000;
+    if ($d>5) {
+        printf("pid=%d, comm=%s, sleep time=%ld us\n",
+                    pid, comm, $d)
+    }
+    delete(@start[tid]);
+}

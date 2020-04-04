@@ -1,0 +1,4 @@
+BEGIN
+{
+    printf("bpf begin\n")
+}

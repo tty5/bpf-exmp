@@ -1,0 +1,5 @@
+uprobe:a.out:"github.com/sirupsen/logrus.(*Logger).SetFormatter"+187
+{
+    @[probe] = count();
+    printf("%s", ustack)
+}

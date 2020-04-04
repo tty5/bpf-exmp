@@ -1,0 +1,5 @@
+profile:hz:1999
+/comm=="a.out"/
+{
+    @[ustack] = count();
+}

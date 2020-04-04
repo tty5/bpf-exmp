@@ -1,0 +1,21 @@
+/*
+#define EXIT_DEAD			0x0010
+#define EXIT_ZOMBIE			0x0020
+*/
+
+tracepoint:sched:sched_switch
+/args->prev_comm == "go-log" && (uint64)args->prev_state / 16 == 0 /
+{
+    @start[tid] = nsecs
+}
+
+kprobe:finish_task_switch
+/@start[tid]/
+{
+    $d=(nsecs - @start[tid])/1000;
+    if ($d > 500) {
+        printf("pid=%d, comm=%s, sched time=%ld us, %s %s\n",
+                    pid, comm, $d, kstack, ustack)
+    }
+    delete(@start[tid])
+}

@@ -1,0 +1,6 @@
+kprobe:hrtimer_interrupt
+/comm == "a.out"/
+{
+    $ms = nsecs/1000000;
+    printf("time=%ld %s %s\n", $ms, kstack, ustack)
+}

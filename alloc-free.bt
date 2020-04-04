@@ -1,0 +1,23 @@
+BEGIN {
+ @enable = 1;
+}
+
+uprobe:a.out:"alloc"+1025
+/@enable == 1/
+{
+    $ret=*(reg("sp")+0x20);
+    @alloc[$ret] = ustack
+}
+
+uprobe:a.out:"free"
+{
+    $fre=*(reg("sp")+0x8);
+    delete(@alloc[$fre])
+}
+
+interval:s:5
+/@enable == 1/
+{
+    printf("disable\n");
+    @enable = 0
+}
