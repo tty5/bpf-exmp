@@ -8,4 +8,3 @@ kprobe:__send_signal
     $sig = arg0;
     printf("pid %d, comm %s, send signal %d, to pid %d, comm %s\n", pid, comm, $sig, $t->pid, $t->comm);
 }
-
