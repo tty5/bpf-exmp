@@ -1,0 +1,22 @@
+#include <linux/mm.h>
+
+BEGIN
+{
+    printf("bpf begin\n")
+}
+
+
+software:major-faults:1
+/comm=="mmap"/
+{
+    printf("major-faults %s\n", ustack);
+    @major = count()
+}
+
+software:minor-faults:1
+/comm=="mmap"/
+{
+    printf("minor-faults %s\n", ustack);
+    @minor = count()
+}
+
