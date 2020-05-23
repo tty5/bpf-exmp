@@ -1,0 +1,4 @@
+kprobe:__handle_mm_fault
+{
+    printf("pid %d stack %s %s \n", pid, kstack, ustack)
+}

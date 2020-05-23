@@ -2,5 +2,5 @@ tracepoint:syscalls:sys_enter_execve,
 tracepoint:syscalls:sys_enter_execveat
 {
     printf("%-10u %s %s ---- ", pid, comm, probe);
-                join(args->argv)
+    join(args->argv)
 }

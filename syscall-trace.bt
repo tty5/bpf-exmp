@@ -1,0 +1,4 @@
+tracepoint:syscalls:sys_enter_write
+{
+    printf("%-10u %s %s\n", pid, comm, probe);
+}

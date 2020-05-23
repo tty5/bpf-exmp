@@ -5,6 +5,5 @@ tracepoint:syscalls:sys_enter_write
     $us = $a /1000 % 1000000;
     $s = $a / 1000 / 1000000;
     printf(" nsecs %ld.%ld us", $s, $us);
-    printf(" %s pid %d write %s\n",
-            probe, pid, str(args->buf, args->count))
+    printf(" %s pid %d write fd %d %s\n", probe, pid, args->fd, ustack)
 }
