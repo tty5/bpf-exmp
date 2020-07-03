@@ -1,4 +1,10 @@
 BEGIN
 {
-    printf("bpf begin\n")
+    $ns = nsecs;
+    $l = $ns / 1000000000;
+    $r = $ns % 1000000000;
+    printf("bpf begin\n");
+    time("%x, %X");
+    printf("\nnsecs %lu.%lu\n", $l, $r/1000);
+    exit();
 }
